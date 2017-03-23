@@ -1,0 +1,3 @@
+# FUnctional JavaScript
+
+Documentation to come...

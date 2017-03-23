@@ -1,0 +1,24 @@
+{
+  "name": "fujs",
+  "version": "0.0.0",
+  "description": "FUnctional JavaScript",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "tape -r babel-register 'packages/**/*.test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m59peacemaker/fujs"
+  },
+  "author": {
+    "name": "Johnny Hauser",
+    "email": "johnnyhauser@gmail.com"
+  },
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "babel-preset-env": "^1.2.2",
+    "babel-register": "^6.24.0",
+    "tape": "^4.6.3"
+  }
+}
