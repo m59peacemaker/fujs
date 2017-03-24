@@ -5,7 +5,8 @@
   "keywords": [],
   "main": "index.js",
   "scripts": {
-    "test": "tape -r babel-register 'packages/**/*.test.js'"
+    "test": "tape -r babel-register 'packages/**/*.test.js'",
+    "watch": "onchange -i 'packages/**/*.js' -- npm test"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "babel-preset-env": "^1.2.2",
     "babel-register": "^6.24.0",
+    "onchange": "^3.2.1",
     "tape": "^4.6.3"
   }
 }
