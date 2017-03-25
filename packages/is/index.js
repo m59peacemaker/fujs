@@ -1,20 +1,23 @@
-import isString from './string'
-import isNumber from './number'
 import isNil from './nil'
 import isRegExp  from './regexp'
+import isString from './string'
+import srslyNumber from './srsly-number'
+import srslyObject from './srsly-object'
 
 const is = {
-  string: isString,
-  number: isNumber,
   nil: isNil,
-  regExp: isRegExp
+  regExp: isRegExp,
+  string: isString,
+  srslyNumber: srslyNumber,
+  srslyObject: srslyObject
 }
 
 export default is
 
 export {
-  isString,
-  isNumber,
   isNil,
-  isRegExp
+  isRegExp,
+  isString,
+  srslyNumber,
+  srslyObject,
 }
