@@ -1,10 +1,12 @@
-// TODO: should this mutate or return a wrapper with length set?
-const setLength = (length, object) => {
-  Object.defineProperty(object, 'length', {get: function () { return length }})
-  return object
+const setLength = (length, fn) => {
+  const f = function () {
+    return fn.apply(this, arguments)
+  }
+  Object.defineProperty(f, 'length', {get: function () { return length }})
+  return f
 }
 
-const arity = (n, fn) => {
+const arityCore = (n, fn) => {
   switch (n) {
     case 0: return function () { return fn.apply(this, arguments) }
     case 1: return function (a0) { return fn.apply(this, arguments) }
@@ -16,4 +18,4 @@ const arity = (n, fn) => {
   }
 }
 
-export default arity
+export default arityCore

@@ -1,6 +1,6 @@
-import curryN from '../curry-n'
+import curry1Core from '../curry1/core'
+import curry2Core from './core'
 
-// TODO: probably replace with a manual, dumb version if it's faster
-const curry2 = curryN(2)
+const curry2 = curry1Core(curry2Core)
 
 export default curry2

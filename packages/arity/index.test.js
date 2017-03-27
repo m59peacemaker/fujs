@@ -1,5 +1,5 @@
 import test from 'tape'
-import arity from './_'
+import arity from './'
 import range from '../range'
 
 const fn = () => {}

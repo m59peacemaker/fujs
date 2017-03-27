@@ -1,5 +1,5 @@
 import test from 'tape'
-import partial from './_'
+import partial from './'
 
 const fn = (a, b, c, d) => a + b + c + d
 

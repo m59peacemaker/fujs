@@ -1,4 +1,4 @@
-const range = function (from, to) {
+const rangeCore = function (from, to) {
   const result = []
   var n = from
   while (n < to) {
@@ -8,4 +8,4 @@ const range = function (from, to) {
   return result
 }
 
-export default range
+export default rangeCore
