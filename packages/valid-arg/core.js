@@ -1,4 +1,4 @@
-const validArg = (fnSignature, argName, argValue, pred) => {
+const validArgCore = (fnSignature, pred, argName, argValue) => {
   if (!pred(argValue)) {
     const b = v => `\x1b[1m${v}:\x1b[0m`
     const argType = typeof argValue
@@ -7,7 +7,7 @@ const validArg = (fnSignature, argName, argValue, pred) => {
       [undefined, `${fnSignature} "${argName}" value is invalid`],
       ['type', argType],
       ['value', argValue.toString().slice(0, 60)],
-      ['predicate', pred]
+      ['predicate', pred.toString().split('\n').slice(0, 3).join('\n')]
     ]
     pred.name && msg.splice(3, 0, ['must satisfy', pred.name])
     msg = msg
@@ -20,4 +20,4 @@ const validArg = (fnSignature, argName, argValue, pred) => {
   return true
 }
 
-export default validArg
+export default validArgCore

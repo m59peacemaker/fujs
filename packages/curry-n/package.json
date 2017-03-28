@@ -1,0 +1,16 @@
+{
+  "name": "curry-n",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fast-curry": "0.0.14",
+    "instant-curry": "^1.2.0"
+  }
+}
