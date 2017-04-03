@@ -1,19 +1,19 @@
-'use strict'
-
 import Benchmark from 'benchmark'
 import fastCurry from 'fast-curry'
 import instantCurry from 'instant-curry'
+import lodashCurry from 'lodash.curry'
 import curryNCore from '../core'
 import curryN from '../'
 import curry from '../../curry'
 
 // note that fast-curry and instant-curry are not fully operational curries (arity/context/restArgs)
-// maybe expose curry1, 2, 3, 4, benchmark them!
+// `fujs` curryN is the fastest, but create and lift are slowed down by `f.toString = `
 
 const curry2Sets = [
   { name: 'curryNCore', fn: curryNCore.bind(undefined, 2) },
   { name: 'curryN', fn: curryN(2) },
   { name: 'curry', fn: curry },
+  { name: 'lodash.curry', fn: lodashCurry },
   { name: 'fastCurry', fn: fastCurry },
   { name: 'instantCurry', fn: instantCurry }
 ]
@@ -22,11 +22,12 @@ const curry4Sets = [
   { name: 'curryNCore', fn: curryNCore.bind(undefined, 4) },
   { name: 'curryN', fn: curryN(4) },
   { name: 'curry', fn: curry },
+  { name: 'lodash.curry', fn: lodashCurry },
   { name: 'fastCurry', fn: fastCurry },
   { name: 'instantCurry', fn: instantCurry }
 ]
 
-const bench2 = sets => {
+const bench2 = () => {
   const suite = new Benchmark.Suite()
 
   let cfn
@@ -58,7 +59,7 @@ const bench2 = sets => {
   return suite
 }
 
-const bench4 = sets => {
+const bench4 = () => {
   const suite = new Benchmark.Suite()
 
   let cfn
@@ -66,7 +67,7 @@ const bench4 = sets => {
   let cfn1
   let result
 
-  sets.forEach(({name, fn}) => {
+  curry4Sets.forEach(({name, fn}) => {
     suite
       .add(`${name} create`, () => {
         cfn = fn(function (a, b, c, d) { return a + b + c + d })

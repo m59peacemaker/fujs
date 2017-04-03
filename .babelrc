@@ -3,7 +3,7 @@
     ["env", {
       "targets": {
         "node": 4,
-        "browsers": ["ie >= 9"]
+        "browsers": ["ie >= 11"]
       }
     }]
   ]

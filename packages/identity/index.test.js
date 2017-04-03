@@ -8,11 +8,5 @@ test('identity', t => {
   t.equal(identity(undefined), undefined)
   t.equal(identity(null), null)
 
-  try {
-    t.equal(typeof identity(), 'function', 'is curried')
-    t.equal(identity()()(123), 123)
-  } catch (err) {
-    t.fail("curry isn't working")
-  }
   t.end()
 })

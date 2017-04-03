@@ -1,29 +1,28 @@
 'use strict'
 
-import arityCore from '../arity/core'
+import arityCore from '@fujs/arity/core'
 
 /*
- *  - "curried function / curriedFn": the function returned by `curryN(n, fn)`
- *  - "partially applied function": function returned by calling `curriedFn` with fewer arguments than `curriedFn.length` (n)
- *  - "CPF": a curried or partially applied function
- *
-   // TODO: this should now refer to `cachedLength`, as I ditched `cacheArray`
- *  Using `cachedArray` improves final invocation performance by 700%. (seriously)
- *  Mutating in the while loop rather than [...accumulatedArgs, ....arguments]
- *    increases final invocation performance by 1000% (seriously)
- *  Assigning rather than pushing to array makes a 400% difference.
- *  On the invocation to the CPF that passes enough arguments to satisfy the curry,
- *    `cachedArray` is created and populated with all the arguments so far,
- *     then `cachedArray` is applied to `fn`.
- *  If the CPF is called again with enough arguments,
- *    `cachedArray` can be reused rather than creating a new array.
- *  The values of `cachedArray` will just be overwritten to match the new given arguments.
+  "curried function / curriedFn": the function returned by `curryN(n, fn)`
+  "partially applied function": function returned by calling `curriedFn` with fewer arguments than `curriedFn.length` (n)
+  "CPF": a curried or partially applied function
+
+  Using `cachedLength` improves final invocation performance by 700%. (seriously)
+  Mutating in the while loop rather than [...accumulatedArgs, ....arguments]
+    increases final invocation performance by 1000% (seriously)
+  Assigning rather than pushing to array makes a 400% difference.
+  On the invocation to the CPF that passes enough arguments to satisfy the curry,
+    `cachedLength` stores the length of all the arguments accumulated prior to the current call,
+    then the new arguments are mutated onto the existing accumulatedArgs array
+  `cachedLength` lets future calls to the fn know where to mutate the new arguments into the existing array
+  The values of `cachedArray` will just be overwritten to match the new given arguments.
+  `f.toString = ` reduces performance by 600 - 900% o_O
  */
 
 const makeCurriedFn = (n, accumulatedArgs, fn) => {
   let cachedLength
-  return function curriedFn () {
-    const receivedEnoughArgs = arguments.length >= n
+  const f  = function (...args) {
+    const receivedEnoughArgs = args.length >= n
 
     if (receivedEnoughArgs && cachedLength === undefined) {
       cachedLength = accumulatedArgs.length
@@ -33,7 +32,7 @@ const makeCurriedFn = (n, accumulatedArgs, fn) => {
 
     const allArgs = receivedEnoughArgs ? accumulatedArgs : []
 
-    const targetLength = arguments.length + accumulatedArgsLength
+    const targetLength = args.length + accumulatedArgsLength
 
     let i = receivedEnoughArgs ? accumulatedArgsLength : 0
 
@@ -41,7 +40,7 @@ const makeCurriedFn = (n, accumulatedArgs, fn) => {
       if (i < accumulatedArgsLength) {
         allArgs[i] = accumulatedArgs[i]
       } else {
-        allArgs[i] = arguments[i - accumulatedArgsLength]
+        allArgs[i] = args[i - accumulatedArgsLength]
       }
       ++i
     }
@@ -53,13 +52,17 @@ const makeCurriedFn = (n, accumulatedArgs, fn) => {
       return fn.apply(this, allArgs)
     }
 
-    const nextArity = n - arguments.length
+    const nextArity = n - args.length
     return arityCore(nextArity, makeCurriedFn(nextArity, allArgs, fn))
   }
+  f.toString = () => `${fn.name ? fn.name : fn.toString()}(${accumulatedArgs.join(', ')})`
+  return f
 }
 
 const curryNCore = (n, fn) => {
-  return arityCore(n, makeCurriedFn(n, [], fn))
+  const f = arityCore(n, makeCurriedFn(n, [], fn))
+  f.toString = () => fn.name ? fn.name : fn.toString()
+  return f
 }
 
 export default curryNCore

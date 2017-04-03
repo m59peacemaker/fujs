@@ -1,7 +1,7 @@
-import curry2 from '../curry2'
+import curryNCore from '../curry-n/core'
 import rangeCore from './core'
 
-const range = curry2((from, to) => {
+const range = curryNCore(2, (from, to) => {
   if (!(typeof from === 'number' && typeof to === 'number')) {
     throw new TypeError('Both arguments to range must be numbers')
   }
