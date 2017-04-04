@@ -20,5 +20,6 @@ test('map', t => {
     [ 2, 3 ],
     'returns a transducer'
   )
+
   t.end()
 })

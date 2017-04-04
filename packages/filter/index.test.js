@@ -20,5 +20,6 @@ test('filter', t => {
     [ 1, 3 ],
     'returns a transducer'
   )
+
   t.end()
 })

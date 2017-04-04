@@ -1,3 +1,3 @@
-const srslyNumber = v => typeof v === 'number' && !isNaN(v)
+const isSrslyNumber = v => typeof v === 'number' && !isNaN(v)
 
-export default srslyNumber
+export default isSrslyNumber

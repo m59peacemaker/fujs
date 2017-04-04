@@ -1,4 +1,4 @@
-import curryNCore from '../curry-n/core'
+import curryNCore from '@fujs/curry-n/core'
 
 const is = curryNCore(2, Object.is)
 

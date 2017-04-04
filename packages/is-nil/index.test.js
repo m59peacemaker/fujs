@@ -1,5 +1,5 @@
 import test from 'tape'
-import isNil from './nil'
+import isNil from './'
 
 test('isNil', t => {
   test('returns true when value is undefined or null', t => {

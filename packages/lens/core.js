@@ -1,10 +1,13 @@
-import map from '../map'
-
-const lensCore = (getter, setter) => toFunctorFn => target => {
-  return map(
-    focus => setter(focus, target),
-    toFunctorFn(getter(target))
-  )
+const lensCore = (get, set) => {
+  return (nextLens) => {
+    if (nextLens) {
+      return {
+        get: data => nextLens.get(get(data)),
+        set: (v, data) => set(nextLens.set(v, get(data)), data)
+      }
+    }
+    return { get, set }
+  }
 }
 
 export default lensCore

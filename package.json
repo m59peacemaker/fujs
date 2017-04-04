@@ -6,8 +6,8 @@
   "keywords": [],
   "main": "index.js",
   "scripts": {
-    "test": "lerna exec -- tape -r babel-register '*.test.js'",
-    "watch": "onchange -i 'packages/**/*.js' -- npm test"
+    "test": "lerna bootstrap && lerna exec -- tape -r babel-register '*.test.js'",
+    "watch": "onchange -i 'packages/**/*' -- npm test"
   },
   "repository": {
     "type": "git",

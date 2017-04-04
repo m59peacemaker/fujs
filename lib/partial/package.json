@@ -1,5 +1,5 @@
 {
-  "name": "@fujs/range",
+  "name": "@fujs/partial",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
@@ -10,6 +10,7 @@
   "author": "Johnny Hauser <johnnyhauser@gmail.com>",
   "license": "CC0-1.0",
   "dependencies": {
-    "@fujs/curry-n": "0.0.0"
+    "@fujs/curry-n": "0.0.0",
+    "@fujs/arity": "0.0.0"
   }
 }
