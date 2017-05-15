@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>fujs docs</title>
+    </head>
+    <body>
+        <p>Use it like this:</p>
+<pre><code class="language-js">import filter from '@fujs/filter'
+
+const arr = [
+    { number: 20 },
+    { number: 12 },
+    { number: 47 }
+]
+const bigEnough = obj =&gt; obj.number &gt; 30
+filter(bigEnough, arr) // =&gt; [{ number: 47 }]
+</code></pre>
+
+    </body>
+</html>
